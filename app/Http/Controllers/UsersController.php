@@ -11,6 +11,8 @@ class UsersController extends Controller
      */
     public function register(Request $request)
     {
+        $username = $request->username;
+        $check = User::where('username', $username)->count();
 
         $user = new User();
         $user->username = $request->username;
@@ -18,8 +20,11 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->phone = $request->phone;
 
-        if($user->save()){
+        if($check == 0){
+          $user->save();
           return response()->json('success');
+        }else if($check != 0){
+          return response()->json('userExists');
         }else{
           return response()->json('error');
         }
