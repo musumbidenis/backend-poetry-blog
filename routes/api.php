@@ -21,3 +21,6 @@ Route::post('/login', 'UsersController@login');
 
 Route::post('/post', 'PostsController@store');
 Route::post('/comment', 'UsersController@store');
+
+Route::post('/userInfo', 'UsersController@userInfo');
+Route::post('/userPosts', 'UsersController@userPosts');

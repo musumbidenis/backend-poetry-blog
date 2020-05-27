@@ -11,7 +11,7 @@ class PostsController extends Controller
   /*GET
   */
   public function index(){
-    $posts = Post::get();
+    $posts = Post::orderBy('created_at', 'DESC')->get();
     return $posts;
   }
 
@@ -28,7 +28,7 @@ class PostsController extends Controller
     $post->title = $request->title;
     $post->description = $request->description;
     $post->username = $request->username;
-    $post->imageUrl = url('/').'/storage/postImages/'.$imageName.'.jpg';
+    $post->imageUrl = url('/').'/storage/app/postImages/'.$imageName.'.jpg';
 
     if($post->save()){
         return response()->json('success');
